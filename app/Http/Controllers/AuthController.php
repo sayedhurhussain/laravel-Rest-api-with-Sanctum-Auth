@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 { 
 
+    // register
     public function register(Request $request) {
         $fields = $request->validate([
             'name'=>'required|string',
@@ -34,4 +35,12 @@ class AuthController extends Controller
         return response ($response, 201);
     }
 
+    //logout
+    public function logout(Request $request) {
+        auth()->user()->tokens()->delete();
+
+        return [
+            'message' => 'Logged out'
+        ];
+    }
 }
